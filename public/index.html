@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Send email</title>
+
+	<style type="text/css">
+	body {
+		background: grey;
+		margin: 0px;
+		background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+		background-size: 400% 400%;
+		animation: gradient 15s ease infinite;
+		height: 100vh;
+	}
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+
+		50% {
+			background-position: 100% 50%;
+		}
+
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+
+	nav {
+		background: rgb(20, 20, 20);
+		color: white;
+		padding: 25px;
+		font-size: 35px;
+	}
+
+	h1 {
+		font-size: 50px;
+	}
+
+	header {
+		text-align: center;
+		font-weight: bold;
+		font-size: 30px;
+	}
+
+	form {
+		text-align: center;
+		width: 50%;
+		margin: auto;
+	}
+
+	input {
+		margin-top: 20px;
+		padding: 10px;
+		width: 90%;
+		background: rgba(255, 255, 255, 0.8);
+		font-size: 20px;
+		border: none;
+	}
+
+	input:hover {
+		background: rgba(255, 255, 255, 0.95);
+	}
+
+	input:focus {
+		outline: none;
+		background: rgba(255, 255, 255, 0.95);
+	}
+
+	.button {
+		border-radius: 20px;
+		background: orange;
+		border: none;
+		text-align: center;
+		font-size: 28px;
+		padding: 5px;
+		transition: all 0.5s;
+	}
+
+	.button span:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+
+	.button:hover span {
+		padding-right: 25px;
+	}
+
+	.button:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
+
+	.button span {
+		position: relative;
+		transition: 0.5s;
+	}
+
+	#submit_email {
+		width: 50%;
+	}
+
+	img {
+		width: 40px;
+		margin: auto;
+		margin-top: 20px;
+		display: none;
+	}
+	</style>
+</head>
+
+<body>
+
+	<nav>Company Name ©</nav>
+
+	<header>
+		<h1>Contact</h1>
+		<p>Need to contact us ? Let us know</p>
+	</header>
+
+	<form>
+		<input id="Name" placeholder="Name">
+		<br>
+		<input id="Email" placeholder="Email">
+		<br>
+		<input id="Subject" placeholder="Subject">
+		<br>
+		<input id="Message" placeholder="Message">
+		<br>
+		<img id="load_gif" src="./loading-gif.gif">
+		<br>
+		<button id="submit_email" class="button" type="button" onclick="sendEmail()"><span id="button_text">Send Email !</span></button>
+	</form>
+
+	<script type="text/javascript">
+	function sendEmail() {
+		document.getElementById("load_gif").style.display = "block";
+
+		//window.location.protocol + "//" + window.location.hostname + window.location.pathname
+		fetch(window.location + "home", {
+				method: 'POST',
+				body: JSON.stringify({
+					"Name": document.getElementById("Name").value,
+					"Email": document.getElementById("Email").value,
+					"Subject": document.getElementById("Subject").value,
+					"Message": document.getElementById("Message").value
+				})
+			})
+			.then(results => results.json())
+			.then(function(value) {
+				console.log(value)
+				if (value["res"] == "ok")
+					document.getElementById("button_text").innerHTML = "Sent !";
+				else
+					document.getElementById("button_text").innerHTML = "Some error occured sending that email. Please try again later.";
+
+				document.getElementById("load_gif").style.display = "none";
+				// setTimeout(() => { // redirect if needed
+				// 	window.location.href = "https://www.google.com";
+				// }, 5000)
+			});
+	}
+	</script>
+</body>
+
+</html>
