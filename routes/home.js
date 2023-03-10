@@ -5,7 +5,7 @@ require('dotenv').config();
 var ElasticEmail = require('@elasticemail/elasticemail-client');
 const SERVER_PORT = process.env.PORT || 80;
 const BOT_EMAIL = "professionaldummyo7@gmail.com"
-const USER_EMAIL = "toocels@gmail.com"
+const USER_EMAIL = "123003078@sastra.ac.in"
 
 var defaultClient = ElasticEmail.ApiClient.instance;
 var apikey = defaultClient.authentications['apikey'];
