@@ -1,4 +1,11 @@
 {
+   "engines":{
+    "node":"14.x"
+  },
+  "scripts":{
+    "start":"node index.js",
+    "test":"echo test && exit 1"
+  },
   "dependencies": {
     "@elasticemail/elasticemail-client": "^4.0.23",
     "dotenv": "^16.0.3",

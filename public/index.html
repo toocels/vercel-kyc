@@ -142,7 +142,6 @@
 	function sendEmail() {
 		document.getElementById("load_gif").style.display = "block";
 
-		//window.location.protocol + "//" + window.location.hostname + window.location.pathname
 		fetch(window.location + "home", {
 				method: 'POST',
 				body: JSON.stringify({
@@ -161,7 +160,7 @@
 					document.getElementById("button_text").innerHTML = "Some error occured sending that email. Please try again later.";
 
 				document.getElementById("load_gif").style.display = "none";
-				// setTimeout(() => { // redirect if needed
+				// setTimeout(() => {		// redirect if needed
 				// 	window.location.href = "https://www.google.com";
 				// }, 5000)
 			});
