@@ -10,6 +10,13 @@ app.use(express.json());
 app.use(express.static('public'))
 app.use("/home", home);
 
+// index.js
+app.get('/', (req, res) => {
+  res.sendFile('index.html', {root: path.join(__dirname, 'public')});
+})
+
 // connection
 const port = process.env.PORT || 80;
 app.listen(port, () => console.log('Listening to port:', port));
+
+module.exports = app;
